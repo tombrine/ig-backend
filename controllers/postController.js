@@ -36,8 +36,7 @@ const getPost = async (req, res) => {
   try {
     const post = await postModel
       .find()
-      .populate("comment", "comment")
-      .populate("likes", "username profileImage");
+      .populate("userId", "username profileImage");
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
