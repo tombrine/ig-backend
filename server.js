@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRouter = require("./routes/userRouter");
-const UserRouter = require("./routes/postRouter");
+const postRouter = require("./routes/postRouter");
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -19,6 +19,6 @@ const connectDatabase = async () => {
 connectDatabase();
 
 app.use(userRouter);
-app.use(UserRouter);
+app.use(postRouter);
 
 app.listen(PORT, console.log(`running on  ${PORT}`));

@@ -18,7 +18,7 @@ const getUser = async (req, res) => {
   try {
     const post = await userModel
       .find()
-      .populate("posts", "caption postImage comment userId");
+      .populate("posts", "caption postImage comment userId likes");
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
