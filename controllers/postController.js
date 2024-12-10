@@ -33,6 +33,7 @@ const getUserPosts = async (req, res) => {
 };
 
 const getPost = async (req, res) => {
+  console.log("hello");
   try {
     const post = await postModel
       .find()
