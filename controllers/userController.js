@@ -48,9 +48,20 @@ const login = async (req, res) => {
     const user = await userModel.findOne({ email });
     console.log(user.password);
     const check = bcrypt.compare(password, user.password);
+
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        username: user.username,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
     if (check) {
       console.log("succes");
-      res.json({ message: "Successfully login" });
+      res.json(token);
     } else {
       throw new Error("Failed to login");
     }
