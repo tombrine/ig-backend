@@ -1,13 +1,29 @@
 const { userModel } = require("../models/userSchema");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
+  const { username, email, password } = req.body;
   try {
-    const user = req.body;
-    console.log(user);
+    const saltRound = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRound);
+    const createdUser = userModel.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
 
-    const response = await userModel.create(user);
-    console.log(response);
-    res.send("done");
+    const token = jwt.sign(
+      {
+        userId: createdUser._id,
+        username: (await createdUser).username,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "24h",
+      }
+    );
+    res.send(token);
   } catch (error) {
     console.log(error);
     res.send("there is a problem");
@@ -26,7 +42,26 @@ const getUser = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await userModel.findOne({ email });
+    console.log(user.password);
+    const check = bcrypt.compare(password, user.password);
+    if (check) {
+      console.log("succes");
+      res.json({ message: "Successfully login" });
+    } else {
+      throw new Error("Failed to login");
+    }
+  } catch (error) {
+    console.log(error);
+    res.send("login failed");
+  }
+};
+
 module.exports = {
   createUser,
   getUser,
+  login,
 };
