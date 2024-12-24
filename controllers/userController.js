@@ -23,7 +23,7 @@ const createUser = async (req, res) => {
         expiresIn: "24h",
       }
     );
-    res.send(token);
+    res.json({ token });
   } catch (error) {
     console.log(error);
     res.send("there is a problem");
