@@ -61,7 +61,7 @@ const login = async (req, res) => {
     );
     if (check) {
       console.log("succes");
-      res.json(token);
+      res.json({ token });
     } else {
       throw new Error("Failed to login");
     }
