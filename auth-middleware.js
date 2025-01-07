@@ -7,6 +7,7 @@ const authMidlleware = (req, res, next) => {
 
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
   if (decodedToken) {
+    req.user = decodedToken;
     next();
   } else {
     res.json({ message: "invalif token" });
