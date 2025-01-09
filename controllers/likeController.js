@@ -8,7 +8,7 @@ const like = async (req, res) => {
           likes: likingUserId,
         },
       });
-      res.status(200).json("you liked post");
+      res.status(200).json({"message": "you liked post"});
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
@@ -23,7 +23,7 @@ const like = async (req, res) => {
           likes: unlikingUserId,
         },
       });
-      res.status(200).json("you unliked post");
+      res.status(200).json({"message": "you unliked post"});
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
