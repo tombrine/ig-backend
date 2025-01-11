@@ -6,7 +6,6 @@ const authMidlleware = (req, res, next) => {
   if (!token) res.json({ message: "no token in header" });
 
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(decodedToken);
   if (decodedToken) {
     req.user = decodedToken;
     next();
