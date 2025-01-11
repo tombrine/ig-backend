@@ -8,7 +8,7 @@ const { follow, unFollow } = require("../controllers/followController");
 const userRouter = Router();
 
 userRouter.post("/signup", createUser);
-userRouter.get("/users/posts", authMidlleware, getUser);
+userRouter.get("/profile/:userId", authMidlleware, getUser);
 userRouter.get("/posts", authMidlleware, getPost);
 userRouter.get("/user/posts", authMidlleware, getUserPosts);
 userRouter.post("/users/follow", authMidlleware, follow);

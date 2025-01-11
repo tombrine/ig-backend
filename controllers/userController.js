@@ -32,15 +32,18 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const post = await userModel
-      .find()
-      .populate("posts", "caption postImage comment userId likes");
-    res.status(200).json(post);
+    const URL = req.params["userId"];
+    console.log(URL);
+    const user = await userModel.findById(URL);
+    const POP = await user.populate("following followers posts");
+    console.log(POP);
+    res.status(200).send(POP);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.send("err");
   }
 };
+ 
 
 const login = async (req, res) => {
   const { email, password } = req.body;
