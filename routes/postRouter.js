@@ -11,6 +11,6 @@ postRouter.post("/comment", authMidlleware, comment);
 postRouter.post("/post/like", authMidlleware, like);
 postRouter.post("/post/unlike", authMidlleware, unlike);
 postRouter.get("/post/:postId", authMidlleware, getComments);
-postRouter.get("/likes", authMidlleware, getLikes);
+postRouter.get("/likes/:postId", authMidlleware, getLikes);
 
 module.exports = postRouter;

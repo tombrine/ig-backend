@@ -1,7 +1,7 @@
 const { postModel } = require("../models/postSchema");
 
 const getLikes = async (req, res) => {
-  const { postId } = req.body;
+  const { postId } = req.params;
   try {
     const response = await postModel.findById(postId).populate({
       path: "likes",
