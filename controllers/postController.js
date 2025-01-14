@@ -45,4 +45,6 @@ const getPost = async (req, res) => {
   }
 };
 
+
+
 module.exports = { post, getPost, getUserPosts };

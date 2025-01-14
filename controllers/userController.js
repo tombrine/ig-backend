@@ -43,7 +43,6 @@ const getUser = async (req, res) => {
     res.send("err");
   }
 };
- 
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -74,8 +73,25 @@ const login = async (req, res) => {
   }
 };
 
+const EditUserProfileIMG = async (req, res) => {
+  try {
+    const file = req.body.profileImage;
+    const userId = req.body._id;
+
+    const POPOP = await userModel.findByIdAndUpdate(userId, {
+      profileImage: file,
+    });
+
+    res.status(200).send(POPOP);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+};
+
 module.exports = {
   createUser,
   getUser,
   login,
+  EditUserProfileIMG
 };
