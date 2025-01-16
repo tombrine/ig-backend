@@ -2,13 +2,12 @@ const { postModel } = require("../models/postSchema");
 const { userModel } = require("../models/userSchema");
 
 const post = async (req, res) => {
-  const { caption, postImage, userId, comment } = req.body;
+  const { caption, postImage, userId } = req.body;
   try {
     const createdPost = await postModel.create({
       caption,
       postImage,
       userId,
-      comment,
     });
     await userModel.findByIdAndUpdate(userId, {
       $push: {
@@ -44,7 +43,5 @@ const getPost = async (req, res) => {
     res.status(500).json(error);
   }
 };
-
-
 
 module.exports = { post, getPost, getUserPosts };
